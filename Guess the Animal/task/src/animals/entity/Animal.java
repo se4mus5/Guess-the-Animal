@@ -1,11 +1,13 @@
 package animals.entity;
 
 import java.util.Set;
-// TODO refactor class for regexp
 
 public class Animal {
     private final String article;
     private final String name;
+
+    private String property;
+    private boolean propertyApplies;
 
     public Animal(String name) {
         if (name.startsWith("a ")) {
@@ -21,6 +23,9 @@ public class Animal {
             this.article = determineArticle(name);
             this.name = name;
         }
+
+        property = "has no known properties.";
+        propertyApplies = true;
     }
 
     static String determineArticle(String animalName) {
@@ -32,5 +37,30 @@ public class Animal {
     @Override
     public String toString() {
         return article + " " + name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getProperty() {
+        if (!propertyApplies) {
+            property = property.replace(" can ", " can't ");
+            property = property.replace(" has ", " doesn't have ");
+            property = property.replace(" is ", " isn't ");
+        }
+        property = property.replace("it ", "");
+        property = property.replace("?", "");
+
+        return property;
+    }
+
+    public void setProperty(String property, boolean propertyApplies) {
+        this.property = property;
+        this.propertyApplies = propertyApplies;
+    }
+
+    public boolean isPropertyApplies() {
+        return propertyApplies;
     }
 }

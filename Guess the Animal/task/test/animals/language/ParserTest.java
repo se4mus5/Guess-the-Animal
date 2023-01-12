@@ -9,26 +9,26 @@ public class ParserTest {
 
     @Test
     public void parseYesNoYesSinglePunctuation() {
-        assertEquals(BinaryChoice.YES, parseYesNo("Yes!"));
+        assertEquals(BinaryChoice.YES, parseBinaryChoiceAnswer("Yes!"));
     }
 
     @Test
     public void parseYesNoYesMultiPunctuation() {
-        assertEquals(BinaryChoice.UNDETERMINED, parseYesNo("Yes..."));
+        assertEquals(BinaryChoice.UNDETERMINED, parseBinaryChoiceAnswer("Yes..."));
     }
 
     @Test
     public void parseYesNoNo() {
-        assertEquals(BinaryChoice.NO, parseYesNo("Nope"));
+        assertEquals(BinaryChoice.NO, parseBinaryChoiceAnswer("Nope"));
     }
 
     @Test
     public void parseYesNoUndetermined() {
-        assertEquals(BinaryChoice.UNDETERMINED, parseYesNo("Cat!"));
+        assertEquals(BinaryChoice.UNDETERMINED, parseBinaryChoiceAnswer("Cat!"));
     }
 
     @Test
     public void parseYesNoNoPunctuation() {
-        assertEquals(BinaryChoice.NO, parseYesNo("No way!"));
+        assertEquals(BinaryChoice.NO, parseBinaryChoiceAnswer("No way!"));
     }
 }

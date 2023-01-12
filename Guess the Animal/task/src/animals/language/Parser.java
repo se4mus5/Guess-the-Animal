@@ -1,7 +1,7 @@
 package animals.language;
 
 public class Parser {
-    public static BinaryChoice parseYesNo(String answer) {
+    public static BinaryChoice parseBinaryChoiceAnswer(String answer) {
         String normalizedAnswer = answer.endsWith(".") || answer.endsWith("!")
                 ? answer.substring(0, answer.length() - 1).toLowerCase() : answer.toLowerCase();
 
