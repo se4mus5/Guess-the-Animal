@@ -1,12 +1,10 @@
 package animals;
 
-import animals.core.AppLogic;
+import animals.controller.AppLogic;
 
-//TODO
-// - simplify project structure
 public class Main {
     public static void main(String[] args) {
         AppLogic appLogic = new AppLogic();
-        appLogic.start();
+        appLogic.gamePlayWorkflow();
     }
 }

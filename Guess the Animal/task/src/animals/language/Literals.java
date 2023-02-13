@@ -1,12 +1,10 @@
 package animals.language;
 
-import animals.util.DayPeriod;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class Literal {
+public class Literals {
     public static final Map<DayPeriod, String> GREETINGS = Map.of(
             DayPeriod.DAWN, "Hi, Early Bird!",
             DayPeriod.MORNING, "Good morning!",
@@ -26,7 +24,7 @@ public class Literal {
     );
 
     public static final Set<String> NO = Set.of(
-            "n", "no", "no way", "nah", "nope", "negative", "I don't think so", "yeah no"
+            "n", "no", "no way", "nah", "nope", "negative", "i don't think so", "yeah no"
     );
 
     public static final List<String> CLARIFICATION = List.of(

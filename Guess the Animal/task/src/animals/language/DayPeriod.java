@@ -1,4 +1,4 @@
-package animals.util;
+package animals.language;
 
 public enum DayPeriod {
     DAWN,

@@ -15,7 +15,12 @@ out/
 log/
 
 # Ignore non-project-related descriptor files
-*.yaml
+#*.yaml
+task-info.yaml
+task-remote-info.yaml
+course-info.yaml
+course-remote-info.yaml
+lesson-info.yaml
 ########################################################
 
 # Ignore Gradle temporary files

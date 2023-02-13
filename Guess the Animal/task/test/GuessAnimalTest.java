@@ -5,12 +5,12 @@ import org.hyperskill.hstest.testcase.CheckResult;
 import java.io.IOException;
 
 public class GuessAnimalTest extends StageTest<String> {
-
     final String[] script = new String[]{
-            "incorrect-statement",
-            "correct-statement",
-            "complete-scenario",
-            "facts-and-question"
+            "the-first-question",
+            "positive-answers",
+            "negative-answers",
+            "unclear-answers",
+            "guessing-game"
     };
 
     @DynamicTest(data = "script")
@@ -19,4 +19,3 @@ public class GuessAnimalTest extends StageTest<String> {
     }
 
 }
-
