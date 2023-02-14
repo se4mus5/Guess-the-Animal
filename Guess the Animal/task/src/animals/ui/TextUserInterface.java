@@ -32,10 +32,10 @@ public class TextUserInterface {
     }
 
     public void promptPostEntry() {
-        System.out.println("Wonderful! I've learned so much about animals!");
+        System.out.println("I've learned so much about animals!");
     }
 
-    public void promptRules() {
+    public void displayRules() {
         System.out.println("Let's play a game! You think of an animal, and I guess it. Press enter when you're ready.");
     }
 
@@ -94,7 +94,7 @@ public class TextUserInterface {
     }
     
     public void promptDoesPropertyApplyToAnimal(KnowledgeTreeNode animal) {
-        System.out.printf("Is this correct for %s?\n", animal.getAnimalNameWithArticle());
+        System.out.printf("Is the statement correct for %s?\n", animal.getAnimalNameWithArticle());
     }
 
     public void promptUnclearYesNo() {

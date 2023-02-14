@@ -1,15 +1,16 @@
 package animals.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.Set;
 import java.util.logging.Level;
 
 import static animals.helper.CentralLogger.logger;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class KnowledgeTreeNode {
-    private final String data;
-
+    private String data;
     private KnowledgeTreeNode leftChild;
-
     private KnowledgeTreeNode rightChild;
 
     public KnowledgeTreeNode(String data) {
@@ -19,18 +20,29 @@ public class KnowledgeTreeNode {
         logger.log(Level.FINE, "## DIAG ## KnowledgeTreeNode created, data: " + data);
     }
 
+    public KnowledgeTreeNode() {} // used for deserialization workflow only
+
+    public KnowledgeTreeNode(String data, KnowledgeTreeNode leftChild, KnowledgeTreeNode rightChild) {
+        this.data = data;
+        this.leftChild = leftChild;
+        this.rightChild = rightChild;
+    }
+
     public String getData() {
         return data;
     }
 
+    @JsonIgnore
     public boolean isLeaf() {
         return leftChild == null && rightChild == null;
     }
 
+    @JsonIgnore
     public boolean isAnimal() {
         return isLeaf();
     }
 
+    @JsonIgnore
     public boolean isFact() {
         return !isAnimal();
     }
@@ -70,6 +82,7 @@ public class KnowledgeTreeNode {
         return VOWELS.contains(firstCharOfAnimalName) ? "an" : "a";
     }
 
+    @JsonIgnore
     public String getAnimalName() {
         if (isAnimal()) {
             if (data.startsWith("a ")) {
@@ -86,6 +99,7 @@ public class KnowledgeTreeNode {
         }
     }
 
+    @JsonIgnore
     public String getAnimalNameWithArticle() {
         if (isAnimal()) {
             if (data.startsWith("a ") || data.startsWith("an ")) {
@@ -100,6 +114,7 @@ public class KnowledgeTreeNode {
         }
     }
 
+    @JsonIgnore
     public String getFact(boolean factApplies) {
         String tempData = String.valueOf(data);
         if (!isAnimal()) {
