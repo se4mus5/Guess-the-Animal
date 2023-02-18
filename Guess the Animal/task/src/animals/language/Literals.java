@@ -14,8 +14,8 @@ public class Literals {
     );
 
     public static final List<String> GOODBYE = List.of(
-      "Bye!", "Goodbye!", "Sayonara!", "Hasta la vista!", "Ciao!", "Have a nice day!",
-      "So long!", "Arrivederci!", "Adieu!", "Do svidanya!", "Farewell!", "See you soon!", "See you later!"
+      "Bye!", "Goodbye!", "Sayonara!", "Hasta la vista!", "Ciao!", "Have a nice day!", "So long!", "Adieu!",
+            "Arrivederci!", "Do svidanya!", "Farewell!", "See you soon!", "See you later!", "Thank you and goodbye!"
     );
 
     public static final Set<String> YES = Set.of(

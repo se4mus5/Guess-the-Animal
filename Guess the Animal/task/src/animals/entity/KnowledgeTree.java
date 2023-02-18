@@ -1,6 +1,7 @@
 package animals.entity;
 
 import animals.helper.PersistenceFormat;
+import animals.helper.TreeHelpers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -8,14 +9,15 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.*;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import static animals.helper.CentralLogger.logger;
 
 public class KnowledgeTree {
     private KnowledgeTreeNode root;
     private KnowledgeTreeNode currentNode;
-
     private KnowledgeTreeNode previousNode;
 
     public KnowledgeTree(KnowledgeTreeNode rootNode) {
@@ -140,4 +142,18 @@ public class KnowledgeTree {
                 ", previousNode=" + previousNode +
                 '}';
     }
+
+    public List<String> getDataFromAllLeaves() {
+        List<String> dataFromLeaves = new ArrayList<>();
+        TreeHelpers.collectLeafData(root, dataFromLeaves);
+        return dataFromLeaves;
+    }
+
+    public List<String> findAnimal(String animalName) {
+        Deque<String> pathToAnimal = new ArrayDeque<>();
+        TreeHelpers.getPathToLeaf(animalName, root, pathToAnimal);
+        pathToAnimal.pop(); // needed to remove the terminator used by the recursive getPathToLeaf
+        return pathToAnimal.stream().toList();
+    }
+
 }

@@ -3,7 +3,7 @@ package animals.helper;
 public class Transformer {
     /**
      * This method transforms a statement about a property of an animal into a question
-     * @param animalFact Statement about a properties of an animal
+     * @param animalFact Statement about a properties of an animal, expected format: as printed by KnowledgeTreeNode.getFact(true)
      * @return Animal fact statement rephrased as question
      */
     public static String transformAnimalFactStatementIntoQuestion(String animalFact) {
