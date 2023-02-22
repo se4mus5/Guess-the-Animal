@@ -1,4 +1,4 @@
-package animals.language;
+package animals.helper;
 
 public enum BinaryChoice {
     NO("No"),

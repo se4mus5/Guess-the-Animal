@@ -1,0 +1,33 @@
+{
+  "data" : "it is a mammal",
+  "leftChild" : {
+    "data" : "shark"
+  },
+  "rightChild" : {
+    "data" : "it is living in the forest",
+    "leftChild" : {
+      "data" : "it can climb trees",
+      "leftChild" : {
+        "data" : "dog"
+      },
+      "rightChild" : {
+        "data" : "cat"
+      }
+    },
+    "rightChild" : {
+      "data" : "it has a long bushy tail",
+      "leftChild" : {
+        "data" : "it is a shy animal",
+        "leftChild" : {
+          "data" : "wolf"
+        },
+        "rightChild" : {
+          "data" : "hare"
+        }
+      },
+      "rightChild" : {
+        "data" : "fox"
+      }
+    }
+  }
+}

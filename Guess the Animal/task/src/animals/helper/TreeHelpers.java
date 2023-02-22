@@ -55,7 +55,7 @@ public class TreeHelpers {
             getPathToLeaf(leafData, node.getRightChild(), collector);
         }
 
-        if (!collector.peek().equals(leafData)) { // if stack has leafData on top, it becomes immutable
+        if (!collector.isEmpty() && !collector.peek().equals(leafData)) { // if stack has leafData on top, it becomes immutable
             // if desired leafData not found in branch, pop on the way back to remove irrelevant part of path
             String pathSection = collector.pop();
             logger.log(Level.FINE, String.format("## DIAG ## Pathfinding - removing irrelevant branch section :%s\n", pathSection));

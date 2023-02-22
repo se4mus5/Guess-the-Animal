@@ -102,6 +102,10 @@ public class KnowledgeTreeNode {
     @JsonIgnore
     public String getAnimalNameWithArticle() {
         if (isAnimal()) {
+            if (System.getProperty("user.language").equals("eo")) {
+                return getAnimalName();
+            }
+
             if (data.startsWith("a ") || data.startsWith("an ")) {
                 return data;
             } else if (data.startsWith("the ")) {
@@ -114,7 +118,6 @@ public class KnowledgeTreeNode {
         }
     }
 
-    @JsonIgnore
     public String getFact(boolean factApplies) {
         String tempData = String.valueOf(data);
         if (!isAnimal()) {
@@ -122,8 +125,13 @@ public class KnowledgeTreeNode {
                 tempData = tempData.replace(" can ", " can't ");
                 tempData = tempData.replace(" has ", " doesn't have ");
                 tempData = tempData.replace(" is ", " isn't ");
+
+                tempData = tempData.replace(" povas ", " ne povas ");
+                tempData = tempData.replace(" havas ", " ne havas ");
+                tempData = tempData.replace(" estas ", " ne estas ");
             }
             tempData = tempData.replace("it ", "");
+            tempData = tempData.replace("ĝi ", "");
             tempData = tempData.replace("?", "");
 
             return tempData;

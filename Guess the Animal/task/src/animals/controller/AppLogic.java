@@ -2,7 +2,7 @@ package animals.controller;
 
 import animals.entity.KnowledgeTreeStatistics;
 import animals.helper.PersistenceFormat;
-import animals.language.BinaryChoice;
+import animals.helper.BinaryChoice;
 import animals.entity.KnowledgeTree;
 import animals.entity.KnowledgeTreeNode;
 import animals.ui.TextUserInterface;
@@ -13,7 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.*;
 
@@ -22,7 +21,6 @@ import static animals.helper.TreeHelpers.*;
 
 public class AppLogic {
     private final TextUserInterface ui;
-
     private BinaryChoice doesEnteredFactApplyToAnimal; // drives leftChild/rightChild configuration of distinguishingFactNode
     private BinaryChoice doesKnowledgeTreeFactApplyToAnimal; // drives shape of knowledgeTree
     private KnowledgeTree knowledgeTree;
@@ -46,15 +44,9 @@ public class AppLogic {
     }
 
     public void mainWorkflow() {
-
         logger.log(Level.INFO, "========================== App started ==========================");
         ui.printGreeting();
         knowledgeTree = assembleKnowledgeTree();
-
-        // TODO use or remove
-        //System.out.println("## DIAG ## testing node count: " + countNodes(knowledgeTree.getRoot(), true));
-        //System.out.println("## DIAG ## testing node depth: "
-        //        + Arrays.toString(depthOfTreeAtEachLeaf(knowledgeTree.getRoot()).toArray()));
 
         ui.printWelcome();
         while(true) {
@@ -70,11 +62,12 @@ public class AppLogic {
                     case 5 -> displayKnowledgeTree();
                     case 0 -> {
                         ui.sayGoodbye();
+                        knowledgeTree.serialize(persistenceFormat);
                         return;
                     }
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Please select a **number** from the menu choices.");
+                ui.printMenuSelectionError();
             }
         }
     }
@@ -150,13 +143,12 @@ public class AppLogic {
     /**
      * Create knowledge tree.
      * First try to restore state from serialized form (JSON, YAML, XML).
-     * If serialized file does not exist, as the user for input and create a knowledge tree with a single node.
+     * If serialized s - does not exist, as the user for input and create a knowledge tree with a single node.
      * @return the assembled KnowledgeTree object
      */
     private KnowledgeTree assembleKnowledgeTree() {
         KnowledgeTree knowledgeTree;
-        Path dataFilePath = Paths.get("animals." + persistenceFormat.name().toLowerCase());
-        if (Files.exists(dataFilePath)) {
+        if (new KnowledgeTree().doesExistSerialized(persistenceFormat)) {
             knowledgeTree = KnowledgeTree.constructFromSerialized(persistenceFormat);
         } else {
             ui.promptForFavoriteAnimal();

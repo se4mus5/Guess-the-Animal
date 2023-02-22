@@ -9,9 +9,11 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 
 import static animals.helper.CentralLogger.logger;
 
@@ -85,7 +87,8 @@ public class KnowledgeTree {
     }
 
     public void serialize(PersistenceFormat persistenceFormat) {
-        String fileName = "animals." + persistenceFormat.name().toLowerCase();
+        String internationalSuffix = System.getProperty("user.language").equals("eo") ? "_eo" : "";
+        String fileName = "animals" + internationalSuffix + "." + persistenceFormat.name().toLowerCase();
         ObjectMapper objectMapper = new JsonMapper();
 
         switch (persistenceFormat) {
@@ -102,8 +105,16 @@ public class KnowledgeTree {
         }
     }
 
+    public boolean doesExistSerialized(PersistenceFormat persistenceFormat) {
+        String internationalSuffix = System.getProperty("user.language").equals("eo") ? "_eo" : "";
+        Path dataFilePath = Paths.get("animals" + internationalSuffix + "."
+                + persistenceFormat.name().toLowerCase());
+        return Files.exists(dataFilePath);
+    }
+
     public static KnowledgeTree constructFromSerialized(PersistenceFormat persistenceFormat) {
-        String fileName = "animals." + persistenceFormat.name().toLowerCase();
+        String internationalSuffix = System.getProperty("user.language").equals("eo") ? "_eo" : "";
+        String fileName = "animals" + internationalSuffix + "." + persistenceFormat.name().toLowerCase();
         ObjectMapper objectMapper = new JsonMapper();
 
         switch (persistenceFormat) {
@@ -152,7 +163,9 @@ public class KnowledgeTree {
     public List<String> findAnimal(String animalName) {
         Deque<String> pathToAnimal = new ArrayDeque<>();
         TreeHelpers.getPathToLeaf(animalName, root, pathToAnimal);
-        pathToAnimal.pop(); // needed to remove the terminator used by the recursive getPathToLeaf
+        if (!pathToAnimal.isEmpty()) {
+            pathToAnimal.pop(); // needed to remove the terminator used by the recursive getPathToLeaf
+        }
         return pathToAnimal.stream().toList();
     }
 
